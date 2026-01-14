@@ -19,7 +19,7 @@ def convert_to_numeric_in_millions(value):
     else:
         # Handle values that are just numbers as strings (e.g., "0")
         try:
-           return float(value) / 1000000    #to handle for eg 400 foloowers 
+           return float(value) / 1000  #to handle for eg 400 foloowers 
         except ValueError:
            return np.nan                    #If the code in the try block fails because the string cannot be converted into a number ValueError is raised).
   return np.nan
@@ -73,14 +73,12 @@ df["anomaly_label"] = iso.predict(X)
 
 df["anomaly_score"] = iso.decision_function(X)
 
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler   #imp for isolation forest 
 
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
 iso.fit(X_scaled)
-
-
 
 import joblib
 joblib.dump(iso, "isolation_forest_influencer.pkl")
